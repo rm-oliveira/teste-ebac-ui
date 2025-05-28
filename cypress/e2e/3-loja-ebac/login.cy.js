@@ -48,7 +48,7 @@ describe('Funcionalidade: Login', () => {
             .should('contain', 'Olá, rayane (não é rayane? Sair)')
     });
 
-    it.only('Deve fazer login com sucesso - Fixture', () => {
+    it('Deve fazer login com sucesso - Fixture', () => {
         cy.fixture('perfil').then(dados => {
             cy.get('#username').type(dados.usuario)
             cy.get('#password').type(dados.senha, {log: false})
@@ -56,6 +56,12 @@ describe('Funcionalidade: Login', () => {
             cy.get('.woocommerce-MyAccount-content > :nth-child(2)')
                 .should('contain', 'Olá, rayane (não é rayane? Sair)')
         })
+    });
+
+    it.only('Deve fazer login com sucesso - Usando comandos', () => {
+        cy.login('rayane@ebac.com', 'rayane1234')
+        cy.get('.woocommerce-MyAccount-content > :nth-child(2)')
+            .should('contain', 'Olá, rayane (não é rayane? Sair)')
     });
 
 })
